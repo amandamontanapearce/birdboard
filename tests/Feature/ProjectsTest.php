@@ -17,14 +17,14 @@ class ProjectsTest extends TestCase
      */
     public function testUserCanCreateProjectTest()
     {
+        $this->withoutExceptionHandling();
+
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence,
         ];
         $this->post('/projects', $attributes);
         $this->assertDatabaseHas('projects', $attributes);
-
-        // $response = $this->get('/');
-        // $response->assertStatus(200);
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 }
