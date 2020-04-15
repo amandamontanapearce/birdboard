@@ -36,9 +36,9 @@ class ProjectsTest extends TestCase
     public function testUserCanViewProject()
     {
         $this->withoutExceptionHandling();
-        
+
         $project = factory('App\Project')->create();
-        $this->get('/projects/' . $project->id)
+        $this->get($project->path())
             ->assertSee($project->title)
             ->assertSee($project->description);
     }
